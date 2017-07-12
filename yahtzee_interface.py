@@ -1,10 +1,10 @@
-import itertools, random, sys
+import itertools, random, sys, copy
 from yahtzee_categories import *
 class Player:
 	def __init__(self):
 		self.scorecard = {}
 		self.hand = []
-		self.table = [1,1,1,1,1]
+		self.table = ["1","1","1","1","1"]
 		self.scorecard['ones'] = None
 		self.scorecard['twos'] = None
 		self.scorecard['threes'] = None
@@ -29,57 +29,57 @@ class Player:
 
 	def assign(self):
 		print self.scorecard
-		assignment = raw_input('To which category do you wish to assign them (see the above scorecard):')
+		assignment = raw_input('To which category do you wish to assign them (see the above scorecard):\n')
 		try:
 			if assignment != None:
-				scorecard[assignment] = eval(assignment)(self.table + self.hand)
+				print eval(assignment)(self.table + self.hand)
+				self.scorecard[assignment] = eval(assignment)(self.table + self.hand)
 			else:
 				raise 'myerror'
 		except:
 			print 'point assignment is not valid'
-			p = raw_input('choose a category to assign your points to:')
-			assign(self,p)
+			p = raw_input('choose a category to assign your points to:\n')
+			self.assign()
 
 	def keeps(self):
-		 k = raw_input('which dice do you want to keep (ex. for a roll of [5,4,3,4,6], you could write 4,4): \n').split(',')
-		 tab = copy.deepcopy(self.table)
-		 for n in k:
-		 	if n in tab:
-		 		tab.remove(n)
-		 	else:
-		 		print 'that is not a valid input'
-		 		return keeps(self)
-		 return k
-
+		print self.table
+		k = map(int, raw_input('Which dice do you want to keep (ex. for a roll of [5,4,3,4,6], you could write 4,4): \n').split(','))
+		tab = copy.deepcopy(self.table)
+		for n in k:
+			if n in tab:
+				tab.remove(n)
+			else:
+				print 'That is not a valid input'
+				return self.keeps()
+		return k
 
 	def move(self):
-		yn = raw_input('input anything to roll')
-		if yn:
-			roll()
+		raw_input('Input anything to roll\n')
+		if True:
+			self.roll()
 		print self.table
-		assignyn = raw_input('Do you want to assign your points to a category? y/n:')
+		assignyn = raw_input('Do you want to assign your points to a category? y/n:\n')
 		if assignyn == 'y' or assignyn == 'Y':
-			assign()
+			self.assign()
 			return None
-		keeping = keeps()
-		keep(keeping)
-		yn = raw_input('input anything to roll')
-		if yn:
-			roll()
+		keeping = self.keeps()
+		self.keep(keeping)
+		raw_input('Input anything to roll\n')
+		if True:
+			self.roll()
 		self.table += self.hand
 		self.hand = []
 		print self.table
-		assignyn = raw_input('Do you want to assign your points to a category? y/n:')
+		assignyn = raw_input('Do you want to assign your points to a category? y/n:\n')
 		if assignyn == 'y' or assignyn == 'Y':
-			assign()
+			self.assign()
 			return None
-		keeping = keeps()
-		keep(keeping)
-		yn = raw_input('input anything to roll')
-		if yn:
-			roll()
+		keeping = self.keeps()
+		self.keep(keeping)
+		raw_input('Input anything to roll\n')
+		if True:
+			self.roll()
 		self.table += self.hand
 		self.hand = []
 		print self.table
-		print self.scorecard
-		assign()
+		self.assign()
