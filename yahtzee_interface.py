@@ -1,28 +1,3 @@
-import itertools, random
-from yahtzee_categories import *
-class Player:
-	def __init__(self):
-		self.scorecard = {}
-		self.hand = []
-		self.table = [1,1,1,1,1]
-		self.scorecard['ones'] = None
-		self.scorecard['twos'] = None
-		self.scorecard['threes'] = None
-		self.scorecard['fours'] = None
-		self.scorecard['fives'] = None
-		self.scorecard['sixes'] = None
-		self.scorecard['threeOfAKind'] = None
-		self.scorecard['fourOfAKind'] = None
-		self.scorecard['smallStraight'] = None
-		self.scorecard['largeStraight'] = None
-		self.scorecard['fullHouse'] = None
-		self.scorecard['chance'] = None
-		self.scorecard['yahtzee'] = None
-
-	def roll(self):
-		self.table = list(random.choice(list(itertools.product(range(1,7),repeat = len(self.table)))))
-
-	def keep(self, keepers):
 import itertools, random, sys
 from yahtzee_categories import *
 class Player:
