@@ -4,7 +4,7 @@ from yahtzee_categories import *
 
 class Player:
 	def __init__(self):
-		self.scorecard = ys.Scorecard()
+		self.scorecard = ys.Scorecard(self)
 		self.hand = []
 		self.table = ["1","1","1","1","1"]
 		
@@ -12,6 +12,7 @@ class Player:
 		self.table = list(random.choice(list(itertools.product(range(1,7),repeat = len(self.table)))))
 		self.table += self.hand
 		self.hand = []
+		print self.table
 
 	def keep(self, keepers):
 		for n in keepers:
@@ -21,17 +22,11 @@ class Player:
 	def assign(self):
 		print self.scorecard
 		assignment = raw_input('To which category do you wish to assign them (see the above scorecard):\n')
-		# try:
-		print assignment
-		print self.scorecard.emptySpace()
 		if assignment in self.scorecard.emptySpace():
 			self.scorecard.update(assignment, self.table)
 		else:
 			print 'Point category is already taken'
 			self.assign()
-		# except:
-		# 	print 'Point assignment is not valid'
-		# 	self.assign()
 
 	def keeps(self):
 		print self.table
@@ -49,7 +44,6 @@ class Player:
 	def move(self):
 		raw_input('Input anything to roll\n')
 		self.roll()
-		print self.table
 		assignyn = raw_input('Do you want to assign your points to a category? y/n:\n')
 		if assignyn == 'y' or assignyn == 'Y':
 			self.assign()
@@ -58,7 +52,6 @@ class Player:
 		self.keep(keeping)
 		raw_input('Input anything to roll\n')
 		self.roll()
-		print self.table
 		assignyn = raw_input('Do you want to assign your points to a category? y/n:\n')
 		if assignyn == 'y' or assignyn == 'Y':
 			self.assign()
@@ -67,5 +60,4 @@ class Player:
 		self.keep(keeping)
 		raw_input('Input anything to roll\n')
 		self.roll()
-		print self.table
 		self.assign()
