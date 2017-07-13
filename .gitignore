@@ -1,2 +1,4 @@
 *.pyc
 *.orig
+src/*.pyc
+src/*.orig
