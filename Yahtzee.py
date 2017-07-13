@@ -1,5 +1,6 @@
 import yahtzee_categories as yc
 import yahtzee_interface as yi
+import yahtzee_scorecard as ys
 
 def main():
 	P1 = yi.Player()
