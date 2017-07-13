@@ -3,7 +3,7 @@ from pygame.locals import *
 import yahtzee_categories
 import time
 import sys
-import scoreboard
+import yahtzee_scorecard as ys
 # Define some colors
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
@@ -15,14 +15,20 @@ screen_width = 1100
 screen_height = 900
 screen = pygame.display.set_mode([screen_width, screen_height])
 
-#scoreboard = Scorecard()
-diceList = [1,2,3,4,5]
+diceList = [3,4,3,4,5]
 player = 0 # 0: player, 1: AI
 rolled = 0 # 0: able to roll, 1: not 
 fontSmall=pygame.font.Font(None,20)
 
-scoreboard = Scorecard()
-scoreboard.score = {"ones":1, "twos":2, "threes":3, "fours":4, "fives":5, "sixes":6}
+
+scorecard = ys.Scorecard()
+scorecard.update("ones", [1,1,1,2,2])
+scorecard.update("twos", [2,2,2,3,4])
+scorecard.update("threes", [3,1,1,2,2])
+scorecard.update("fours", [4,4,1,2,2])
+#scorecard.update("fives", [5,1,1,2,2])
+scorecard.update("sixes", [6,6,1,2,2])
+
 
 board = pygame.image.load("resources/image/Board.png")
 board = pygame.transform.scale(board,(screen_width,screen_height))
@@ -38,16 +44,24 @@ for i in range(1,7):
 	img = pygame.transform.scale(img,(50,50))
 	dice.append(img)
 
+myfont = pygame.font.SysFont("comicsansms", 20)
 # Set the height and width of the screen
 
 
 
 while True:
 	screen.blit(roll_dice[rolled],(280,610))
+
 	for i in range(5):
 		screen.blit(dice[i],(215+70*i,680))
+	
 
-	screen.blit(scoreboard.scores["ones"],(500,500))
+	for i in range(6):
+		key = scorecard.upperScoreKind[i]
+		if scorecard.scores[key] != -1:
+			text = myfont.render(str(scorecard.scores[key]),1,(0,0,0))
+			screen.blit(text,(940+player*60,220+590/15.0*i))
+
 
 	#if player==
 

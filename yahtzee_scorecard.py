@@ -1,8 +1,8 @@
 import yahtzee_categories
 
 class Scorecard():
-	def __init__(self, player):
-		self.player = player
+	def __init__(self):
+		#self.player = player
 		self.scores = {}
 		self.upperScoreKind = ["ones", "twos", "threes", "fours", "fives", "sixes"]
 		self.lowerScoreKind = ["threeOfAKind", "fourOfAKind", "fullHouse", "smallStraight", "largeStraight","chance", "yahtzee"]
@@ -71,7 +71,7 @@ TOTAL SCORE:		%03d
 			self.scores["bonus"] = 35 if upperSum >= 63 else 0
 
 if __name__ == '__main__':
-	card = Scorecard(1)
+	card = Scorecard()
 	card.update("ones", [1, 1, 1, 2, 2])
 	card.update("twos", [1, 1, 1, 2, 2])
 	card.update("threes", [3, 3, 3, 3, 2])
