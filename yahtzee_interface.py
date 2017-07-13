@@ -38,7 +38,6 @@ class Player:
 				raise 'myerror'
 		except:
 			print 'point assignment is not valid'
-			p = raw_input('choose a category to assign your points to:\n')
 			self.assign()
 
 	def keeps(self):
