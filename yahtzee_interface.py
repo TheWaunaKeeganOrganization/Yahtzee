@@ -31,14 +31,14 @@ class Player:
 		print self.scorecard
 		assignment = raw_input('To which category do you wish to assign them (see the above scorecard):\n')
 		try:
-			if assignment != None:
+			if self.scorecard[assignment] is None:
 				print eval(assignment)(self.table + self.hand)
 				self.scorecard[assignment] = eval(assignment)(self.table + self.hand)
 			else:
-				raise 'myerror'
+				print 'Point category is already taken'
+				self.assign()
 		except:
-			print 'point assignment is not valid'
-			p = raw_input('choose a category to assign your points to:\n')
+			print 'Point assignment is not valid'
 			self.assign()
 
 	def keeps(self):
