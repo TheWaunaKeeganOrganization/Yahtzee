@@ -1,6 +1,5 @@
 import yahtzee_categories as yc
 import yahtzee_interface as yi
-import yahtzee_scorecard as ys
 
 def main():
 	P1 = yi.Player()
@@ -10,8 +9,8 @@ def main():
 		P1.move()
 		print("Player 2's Turn!")
 		P2.move()
-	P1Score = getTotalScore(P1.scorecard)
-	P2Score = getTotalScore(P2.scorecard)
+	P1Score = P1.scorecard.getTotalScore()
+	P2Score = P2.scorecard.getTotalScore()
 	print("Player 1 has earned " + str(P1Score) + " points!")
 	print("Player 2 has earned " + str(P2Score) + " points!")
 	if P1Score > P2Score:
