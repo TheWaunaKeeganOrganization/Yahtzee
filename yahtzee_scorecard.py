@@ -67,7 +67,8 @@ TOTAL SCORE:		%03d
 
 		# if upper sum is greater or equal to 63, then the bonus score becomes 35
 		upperSum = sum([self.scores[name] for name in self.upperScoreKind if self.scores[name]>=0])
-		if upperSum >= 63 and self.isUpperFull(): self.scores["bonus"] = 35
+		if self.isUpperFull():
+			self.scores["bonus"] = 35 if upperSum >= 63 else 0
 
 if __name__ == '__main__':
 	card = Scorecard(1)
@@ -76,6 +77,6 @@ if __name__ == '__main__':
 	card.update("threes", [3, 3, 3, 3, 2])
 	card.update("fours", [4, 4, 4, 4, 2])
 	card.update("fives", [5, 5, 6, 5, 5])
-	#card.update("sixes", [6, 6, 6, 6, 2])
+	card.update("sixes", [6, 6, 6, 6, 2])
 	print card.getTotalScore()
 	print card.isUpperFull()
