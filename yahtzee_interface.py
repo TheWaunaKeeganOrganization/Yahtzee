@@ -37,7 +37,6 @@ class Player:
 				raise 'myerror'
 		except:
 			print 'point assignment is not valid'
-=======
 			p = raw_input('choose a category to assign your points to:\n')
 			if self.scorecard[assignment] is None:
 				print eval(assignment)(self.table + self.hand)
@@ -47,7 +46,6 @@ class Player:
 				self.assign()
 		except:
 			print 'Point assignment is not valid'
-=======
 			self.assign()
 
 	def keeps(self):
