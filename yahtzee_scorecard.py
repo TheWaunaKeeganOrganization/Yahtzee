@@ -1,7 +1,8 @@
 import yahtzee_categories
 
 class Scorecard():
-	def __init__(self):
+	def __init__(self, player):
+		self.player = player
 		self.scores = {}
 		self.upperScoreKind = ["ones", "twos", "threes", "fours", "fives", "sixes"]
 		self.lowerScoreKind = ["threeOfAKind", "fourOfAKind", "fullHouse", "smallStraight", "largeStraight", "yahtzee", "chance"]
@@ -15,35 +16,38 @@ class Scorecard():
 		upperSum = sum([self.scores[name] for name in self.upperScoreKind if self.scores[name]>=0])
 		scoreTuple = tuple([self.scores[i] if self.scores[i]>=0 else 0 for i in self.upperScoreKind])+(upperSum,self.scores["bonus"])+\
 					 tuple([self.scores[i] if self.scores[i]>=0 else 0 for i in self.lowerScoreKind])+(self.getTotalScore(),)
+		posScoreTuple = {k:(v if v>-1 else "Taken") for k,v in yahtzee_categories.allCategories(self.player.table).iteritems()}
+		print posScoreTuple
 		s = """
--------------------
-Ones:			%3d
-Twos:			%3d
-Threes:			%3d
-Fours:			%3d
-Fives:			%3d
-Sixes:			%3d
--------------------
-Sum:			%3d
-Bonus:			%3d
--------------------
-Three of a kind:%3d	
-Four of a kind:	%3d
-Full House:		%3d
-Small straight:	%3d
-Large straight:	%3d
-Chance:			%3d
-YHATZEE:		%3d
--------------------
-TOTAL SCORE:	%3d
-""" %scoreTuple
+CAT 			CUR 	POS
+-----------------------------------
+ones:			%03d	{0[ones]}
+twos:			%03d	{0[twos]}
+threes:			%03d	{0[threes]}
+fours:			%03d	{0[fours]}
+fives:			%03d	{0[fives]}
+sixes:			%03d	{0[sixes]}
+-----------------------------------
+sum:			%03d
+bonus:			%03d
+-----------------------------------
+threeOfAKind:		%03d	{0[threeOfAKind]}
+fourOfAKind:		%03d	{0[fourOfAKind]}
+fullHouse:		%03d	{0[fullHouse]}
+smallStraight:		%03d	{0[smallStraight]}
+largeStraight:		%03d	{0[largeStraight]}
+chance:			%03d	{0[chance]}
+yahtzee:		%03d	{0[yahtzee]}
+-----------------------------------
+TOTAL SCORE:		%03d
+""".format(posScoreTuple) %scoreTuple 
 
 		return s
 		
 	# list of unfilled score names
 	def emptySpace(self):
-		upper = [name for name in upperScoreKind if self.scores[name]==-1]
-		lower = [name for name in lowerScoreKind if self.scores[name]==-1]
+		upper = [name for name in self.upperScoreKind if self.scores[name]==-1]
+		lower = [name for name in self.lowerScoreKind if self.scores[name]==-1]
 		return upper + lower
 
 	# current total score
