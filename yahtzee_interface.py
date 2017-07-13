@@ -21,7 +21,7 @@ class Player:
 			self.hand.append(n)
 
 	def assign(self):
-		for i in self.scorecard.keys(): print i, ":", self.scorecard[i], "\n"
+		print self.scorecard
 		assignment = raw_input('To which category do you wish to assign them (see the above scorecard):\n')
 		if assignment in self.scorecard.emptySpace():
 			self.scorecard.update(assignment, self.table)
@@ -31,7 +31,7 @@ class Player:
 
 	def keeps(self):
 		print self.table
-		input = raw_input('Which dice do you want to keep (ex. for a roll of [5,4,3,4,6], you could write 4,4): \n')
+		input = raw_input('Which dice do you want to keep (comma separated): \n')
 		try :
 			if len(input) > 0:
 				k = map(int, input.split(','))			

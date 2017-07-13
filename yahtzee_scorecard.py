@@ -17,7 +17,6 @@ class Scorecard():
 		scoreTuple = tuple([self.scores[i] if self.scores[i]>=0 else 0 for i in self.upperScoreKind])+(upperSum,self.scores["bonus"])+\
 					 tuple([self.scores[i] if self.scores[i]>=0 else 0 for i in self.lowerScoreKind])+(self.getTotalScore(),)
 		posScoreTuple = {k:(v if v>-1 else "Taken") for k,v in yahtzee_categories.allCategories(self.player.table).iteritems()}
-		print posScoreTuple
 		s = """
 CAT 			CUR 	POS
 -----------------------------------
