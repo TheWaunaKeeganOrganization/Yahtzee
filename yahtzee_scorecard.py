@@ -3,8 +3,8 @@ import yahtzee_categories
 class Scorecard():
 	def __init__(self):
 		self.scores = {}
-		self.upperScoreKind = ["ones", "twos", "threes", "fours", "fives", "sixes"]
-		self.lowerScoreKind = ["threeOfAKind", "fourOfAKind", "fullHouse", "smallStraight", "largeStraight", "yahtzee", "chance"]
+		self.upperScoreKind = ["Ones", "Twos", "Threes", "Fours", "Fives", "Sixes"]
+		self.lowerScoreKind = ["Three of a kind", "Four of a kind", "Full House", "Small straight", "Large straight", "YAHTZEE", "Chance"]
 		for name in self.upperScoreKind:
 			self.scores[name] = -1
 		for name in self.lowerScoreKind:
@@ -16,34 +16,34 @@ class Scorecard():
 		scoreTuple = tuple([self.scores[i] if self.scores[i]>=0 else 0 for i in self.upperScoreKind])+(upperSum,self.scores["bonus"])+\
 					 tuple([self.scores[i] if self.scores[i]>=0 else 0 for i in self.lowerScoreKind])+(self.getTotalScore(),)
 		s = """
--------------------
+---------------------------
 Ones:			%3d
 Twos:			%3d
 Threes:			%3d
 Fours:			%3d
 Fives:			%3d
 Sixes:			%3d
--------------------
+---------------------------
 Sum:			%3d
 Bonus:			%3d
--------------------
-Three of a kind:%3d	
-Four of a kind:	%3d
+---------------------------
+Three of a kind:	%3d	
+Four of a kind:		%3d
 Full House:		%3d
-Small straight:	%3d
-Large straight:	%3d
+Small straight:		%3d
+Large straight:		%3d
 Chance:			%3d
-YHATZEE:		%3d
--------------------
-TOTAL SCORE:	%3d
+YAHTZEE:		%3d
+---------------------------
+TOTAL SCORE:		%3d
 """ %scoreTuple
 
 		return s
 		
 	# list of unfilled score names
 	def emptySpace(self):
-		upper = [name for name in upperScoreKind if self.scores[name]==-1]
-		lower = [name for name in lowerScoreKind if self.scores[name]==-1]
+		upper = [name for name in self.upperScoreKind if self.scores[name]==-1]
+		lower = [name for name in self.lowerScoreKind if self.scores[name]==-1]
 		return upper + lower
 
 	# current total score
