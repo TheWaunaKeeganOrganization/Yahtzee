@@ -28,10 +28,9 @@ class Player:
 			self.hand.append(n)
 
 	def assign(self):
-		print self.scorecard
+		for i in self.scorecard.keys(): print i, ":", self.scorecard[i], "\n"
 		assignment = raw_input('To which category do you wish to assign them (see the above scorecard):\n')
 		try:
-<<<<<<< HEAD
 			if assignment != None:
 				print eval(assignment)(self.table + self.hand)
 				self.scorecard[assignment] = eval(assignment)(self.table + self.hand)
@@ -39,22 +38,18 @@ class Player:
 				raise 'myerror'
 		except:
 			print 'point assignment is not valid'
-			p = raw_input('choose a category to assign your points to:\n')
-=======
-			if self.scorecard[assignment] is None:
-				print eval(assignment)(self.table + self.hand)
-				self.scorecard[assignment] = eval(assignment)(self.table + self.hand)
-			else:
-				print 'Point category is already taken'
-				self.assign()
-		except:
-			print 'Point assignment is not valid'
->>>>>>> 3d9081476b3f90eda85fa48293aee379595f786d
 			self.assign()
 
 	def keeps(self):
 		print self.table
-		k = map(int, raw_input('Which dice do you want to keep (ex. for a roll of [5,4,3,4,6], you could write 4,4): \n').split(','))
+		input = raw_input('Which dice do you want to keep (ex. for a roll of [5,4,3,4,6], you could write 4,4): \n')
+		try :
+			if len(input) > 0:
+				k = map(int, input.split(','))			
+			else: k = []
+		except:
+				print 'That is not a valid input'
+				return self.keeps()
 		tab = copy.deepcopy(self.table)
 		for n in k:
 			if n in tab:
@@ -65,32 +60,28 @@ class Player:
 		return k
 
 	def move(self):
-		raw_input('Input anything to roll\n')
-		if True:
-			self.roll()
-		print self.table
-		assignyn = raw_input('Do you want to assign your points to a category? y/n:\n')
-		if assignyn == 'y' or assignyn == 'Y':
-			self.assign()
-			return None
-		keeping = self.keeps()
-		self.keep(keeping)
-		raw_input('Input anything to roll\n')
-		if True:
-			self.roll()
-		self.table += self.hand
-		self.hand = []
-		print self.table
-		assignyn = raw_input('Do you want to assign your points to a category? y/n:\n')
-		if assignyn == 'y' or assignyn == 'Y':
-			self.assign()
-			return None
-		keeping = self.keeps()
-		self.keep(keeping)
-		raw_input('Input anything to roll\n')
-		if True:
-			self.roll()
-		self.table += self.hand
-		self.hand = []
-		print self.table
+		rolls = 0
+		assigned = False
+		while rolls < 3 and not assigned:
+			raw_input('Input anything to roll\n')
+			if True:
+				self.roll()
+				rolls += 1
+				print rolls
+				if len(self.hand) != 0:
+					self.table += self.hand
+					self.hand = []
+			print self.table
+			if rolls < 3:
+				assignyn = raw_input('Do you want to assign your points to a category? y/n:\n')
+				while assignyn not in ['y', 'Y', 'n', 'N']:
+						print 'That is not a valid input'
+						assignyn = raw_input('Do you want to assign your points to a category? y/n:\n')
+				if assignyn == 'y' or assignyn == 'Y':
+					self.assign()
+					assigned = True
+					return None
+				else:
+					keeping = self.keeps()
+					self.keep(keeping)
 		self.assign()
