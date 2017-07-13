@@ -69,5 +69,8 @@ def allCategories(d):
 	scores["yahtzee"]=yahtzee(d)
 	scores["chance"]=chance(d)
 	return scores
+<<<<<<< HEAD
 	
 	print scores
+=======
+>>>>>>> e8ea42828736979494b2747f3c5fc32408b13546
