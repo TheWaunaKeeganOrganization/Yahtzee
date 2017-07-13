@@ -67,7 +67,6 @@ class Player:
 			if True:
 				self.roll()
 				rolls += 1
-				print rolls
 				if len(self.hand) != 0:
 					self.table += self.hand
 					self.hand = []
