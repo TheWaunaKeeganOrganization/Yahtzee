@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 AI Rules:
 
 	First Roll Decision Making Hierarchy:
@@ -58,4 +59,66 @@ AI Rules:
 	Third Roll:
 	(4, 2) (2, 2, 2)
 	Box and Score:
+=======
+AI Rules:
+
+	First Roll Decision Making Hierarchy:
+
+	1. Yahtzee- 50
+	2. Large Straight- 40
+	3. Small Straight- 30
+	4. Full House- 25
+	5. Four of a Kind- Number Times 4 Plus Number5
+	6. Three of a Kind- Number Times 3 Plus Number4 Plus Number5
+	7. Most Common Number to Side(Higher Number First), Then Re-Roll
+
+	Second Roll Decision Making Hierarchy:
+	1. Yahtzee- 50
+	2. Large Straight- 40
+	3. Small Straight- 30
+	4. Full House- 25
+	5. Four of a Kind- Number Times 4 Plus Number5
+	6. Three of a Kind- Number Times 3 Plus Number4 Plus Number5
+	7. Most Common Number to Side(Higher Number First), Then Re-Roll
+
+	Final Roll Decision Making Hierarchy:
+	1. Yahtzee- 50
+	2. Large Straight- 40
+	3. Small Straight- 30
+	4. Full House- 25
+	5. Four of a Kind- Number Times 4 Plus Number5
+	6. Three of a Kind- Number Times 3 Plus Number4 Plus Number5
+	7. Most Common Number to Side(Higher Number First) or Chance- Sum of Dice(Higher Score First)
+
+	Example Round 1:
+
+	(d1, d2, d3, d4, d5)
+	(Box, Score)
+	d1 = Die 1
+	d2 = Die 2
+	d3 = Die 3
+	d4 = Die 4
+	d5 = Die 5
+	Box = Category
+	Score = Score
+
+	First Roll:
+	(2, 2, 6, 3, 3)
+	Second Roll:
+	(4, 2, 4) (3, 3)
+	Third Roll:
+	(1) (3, 3, 4, 4)
+	Box and Score:
+	(Chance, 15)
+
+	Example Round 2:
+
+	First Roll:
+	(2, 4, 2, 1, 5)
+	Second Roll:
+	(6, 5, 2) (2, 2)
+	Third Roll:
+	(4, 2) (2, 2, 2)
+	Box and Score:
+>>>>>>> 07069d584f3b1bb18c5d4c6c573a41d6a551ed9f
 	(Four of a Kind, 12)
