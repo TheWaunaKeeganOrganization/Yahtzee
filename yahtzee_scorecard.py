@@ -5,12 +5,12 @@ class Scorecard():
 		self.player = player
 		self.scores = {}
 		self.upperScoreKind = ["ones", "twos", "threes", "fours", "fives", "sixes"]
-		self.lowerScoreKind = ["threeOfAKind", "fourOfAKind", "fullHouse", "smallStraight", "largeStraight", "yahtzee", "chance"]
+		self.lowerScoreKind = ["threeOfAKind", "fourOfAKind", "fullHouse", "smallStraight", "largeStraight","chance", "yahtzee"]
 		for name in self.upperScoreKind:
 			self.scores[name] = -1
 		for name in self.lowerScoreKind:
 			self.scores[name] = -1
-		self.scores["bonus"] = 0
+		self.scores["bonus"] = -1
 
 	def __str__(self):
 		upperSum = sum([self.scores[name] for name in self.upperScoreKind if self.scores[name]>=0])
@@ -54,6 +54,12 @@ TOTAL SCORE:		%03d
 	def getTotalScore(self):
 		return sum([self.scores[name] for name in self.scores if self.scores[name]>=0])
 
+	def getUpperScore(self):
+		return sum([self.scores[name] for name in self.upperScoreKind if self.scores[name]>=0])		
+
+	def isUpperFull(self):
+		return reduce(lambda x,y:x and y, [self.scores[name]>=0 for name in self.upperScoreKind])
+
 	# given scoreKind and dices, update self.scores based on the 
 	def update(self, scoreKind, rolls):
 		assert(self.scores[scoreKind] == -1)
@@ -62,15 +68,15 @@ TOTAL SCORE:		%03d
 
 		# if upper sum is greater or equal to 63, then the bonus score becomes 35
 		upperSum = sum([self.scores[name] for name in self.upperScoreKind if self.scores[name]>=0])
-		if upperSum >= 63: self.scores["bonus"] = 35
+		if upperSum >= 63 and self.isUpperFull(): self.scores["bonus"] = 35
 
 if __name__ == '__main__':
-	card = Scorecard()
+	card = Scorecard(1)
 	card.update("ones", [1, 1, 1, 2, 2])
 	card.update("twos", [1, 1, 1, 2, 2])
 	card.update("threes", [3, 3, 3, 3, 2])
 	card.update("fours", [4, 4, 4, 4, 2])
 	card.update("fives", [5, 5, 6, 5, 5])
-	card.update("sixes", [6, 6, 6, 6, 2])
+	#card.update("sixes", [6, 6, 6, 6, 2])
 	print card.getTotalScore()
-	print card
+	print card.isUpperFull()
