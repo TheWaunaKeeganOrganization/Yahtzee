@@ -4,7 +4,7 @@ from yahtzee_categories import *
 
 class Player:
 	def __init__(self):
-		self.scorecard = ys.Scorecard()
+		self.scorecard = ys.Scorecard(self)
 		self.hand = []
 		self.table = ["1","1","1","1","1"]
 		
