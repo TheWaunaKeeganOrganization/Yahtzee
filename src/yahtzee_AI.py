@@ -59,14 +59,36 @@ class AI:
 		self.assign(select)
 
 	def keeps(self):
+		plausible = []
 		dups = []
+		for i in self.scorecard.keys():
+			if self.scorecard[i] == None:
+				if i == 'ones':
+					plausible.append(1)
+				elif i == 'twos':
+					plausible.append(2)
+				elif i == 'threes':
+					plausible.append(3)
+				elif i == 'fours':
+					plausible.append(4)
+				elif i == 'fives':
+					plausible.append(5)
+				elif i == 'sixes':
+					plausible.append(6)
+
 		for i in self.table:
 			if self.table.count(i) >= 2:
 				dups.append((i,self.table.count(i)))
 		highC = 0
 		highN = 0
 		for i in dups:
-			if i[1] > highC:
+			if i[0] > 3:
+				highC = i[1]
+				highN = i[0]
+			elif i[0] == 3 and self.scorecard["largeStraight"] == None:
+				highC = i[1]
+				highN = i[0]
+			elif i[1] > highC and i[1] in plausible:
 				highC = i[1]
 				highN = i[0]
 		if highC == 2:
@@ -75,9 +97,8 @@ class AI:
 				if i[0] > highN:
 					highN = i[0]
 		keeping = []
-		for i in dups:
-			if i[0] == highN:
-				keeping.append(highN)
+		for i in range(highC):
+			keeping.append(highN)
 		return keeping
 
 	def compute_move(self, tab):
@@ -116,6 +137,7 @@ class AI:
 			cat, point = self.compute_move(temp)
 			maxVal += point
 		if maxP < (maxVal/count):
+			print "maxP :",maxP, "average :", maxVal/count
 			return 'n'
 		return 'n'
 
