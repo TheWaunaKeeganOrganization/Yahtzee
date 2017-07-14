@@ -1,8 +1,8 @@
 import yahtzee_categories
 
 class Scorecard():
-	def __init__(self):
-		#self.player = player
+	def __init__(self, player):
+		self.player = player
 		self.scores = {}
 		self.upperScoreKind = ["ones", "twos", "threes", "fours", "fives", "sixes"]
 		self.lowerScoreKind = ["threeOfAKind", "fourOfAKind", "fullHouse", "smallStraight", "largeStraight","chance", "yahtzee"]
