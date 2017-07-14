@@ -10,3 +10,5 @@ python yahtzee.py
 ```
 
 [Click here for wiki](https://github.com/TheWaunaKeeganOrganization/Yahtzee/wiki)
+
+We will continue working on this project after the conclusion of WCATY 2017

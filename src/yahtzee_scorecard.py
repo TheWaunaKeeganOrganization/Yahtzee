@@ -14,7 +14,7 @@ class Scorecard():
 
 	def __str__(self):
 		upperSum = sum([self.scores[name] for name in self.upperScoreKind if self.scores[name]>=0])
-		scoreTuple = tuple([self.scores[i] if self.scores[i]>=0 else 0 for i in self.upperScoreKind])+(upperSum,self.scores["bonus"])+\
+		scoreTuple = tuple([self.scores[i] if self.scores[i]>=0 else 0 for i in self.upperScoreKind])+(upperSum,self.scores["bonus"] if self.scores["bonus"]>=0 else 0)+\
 					 tuple([self.scores[i] if self.scores[i]>=0 else 0 for i in self.lowerScoreKind])+(self.getTotalScore(),)
 		posScoreTuple = {k:(v if v>-1 else "Taken") for k,v in yahtzee_categories.allCategories(self.player.table).iteritems()}
 		s = """
