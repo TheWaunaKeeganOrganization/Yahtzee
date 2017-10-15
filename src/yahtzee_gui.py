@@ -1,15 +1,26 @@
 import pygame
 from pygame.locals import *
 import yahtzee_categories
+import yahtzee_scorecard as ys
+import yahtzee_interface as yi
 import time
 import sys
-import yahtzee_scorecard as ys
+import os
+import ctypes
+
+user32 = ctypes.windll.user32
+widthTotal, heightTotal = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+
+def initWindowAt(x,y):
+	os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
+
 # Define some colors
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
 RED   = (255,   0,   0)
 
 pygame.init()
+initWindowAt(6,25)
 
 screen_width = 1100
 screen_height = 900
@@ -20,8 +31,8 @@ player = 0 # 0: player, 1: AI
 rolled = 0 # 0: able to roll, 1: not 
 fontSmall=pygame.font.Font(None,20)
 
-
-scorecard = ys.Scorecard()
+P1 = yi.Player()
+scorecard = ys.Scorecard(P1)
 scorecard.update("ones", [1,1,1,2,2])
 scorecard.update("twos", [2,2,2,3,4])
 scorecard.update("threes", [3,1,1,2,2])
